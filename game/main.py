@@ -12,6 +12,9 @@ def main():
         loc = player.location
         print(f"\nYou are at the {loc}\n")
         print(loc.description)
+        if loc.enemy:
+            player.combat_sequence(loc.enemy)
+        print("Exits:")
         for direction, destination in loc.exits.items():
             print(f"{direction} → {destination.name}")  # destination is also a Location
     

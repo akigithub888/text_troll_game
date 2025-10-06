@@ -1,4 +1,4 @@
-from game.enemies import *
+from game.enemies import crocolisk, cannibal
 
 
 class Location:
@@ -19,7 +19,7 @@ class Location:
         return self.name  
 
 clearing = Location("Clearing", "A small jungle clearing. You hear beasts nearby.")
-riverbank = Location("Riverbank", "The river flows swiftly. Crocolisks lurk in the water.", items=["spear"])
+riverbank = Location("Riverbank", "The river flows swiftly. Crocolisks lurk in the water.", items=["spear"], enemy=crocolisk)
 cannibal_camp = Location("Cannibal Camp", "A cannibal camp! Smells terrible.", enemy=cannibal)
 
 clearing.add_exit("north", riverbank)

@@ -1,11 +1,14 @@
 class Enemy:
-    def __init__ (self, name, attack_power, weapon=None, health=10):
+    def __init__ (self, name, attack, weapon=None, health=10):
         self.name = name
         self.weapon = weapon
-        self.attack_power = attack_power
+        self.attack = attack
         self.health = health
 
+    def status(self):
+        return f"{self.name} — HP: {self.health}"
+
     
-cannibal = Enemy("Cannibal", "spear", 10, 20)
-panther = Enemy("Panther", 7)
+cannibal = Enemy("Cannibal", weapon="spear", attack=10, health=20)
+crocolisk = Enemy("Crocolisk", attack=7, health=10)
 

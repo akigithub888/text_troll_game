@@ -2,19 +2,18 @@ from game.player import *
 from game.world import *
 
 def main():
-    print("🌴 Welcome to Stranglethorn Vale! 🌴")
+    print("\n______________________\n\n🌴 Welcome to Stranglethorn Vale! 🌴")
     print("You are a lost troll, deep in the jungle...")
-    print("Type 'quit' to exit.\n")
+    #print("Type 'quit' to quit the game.\n")
 
     player = Player("troll", clearing)
 
     while True:
         loc = player.location
-        print(f"\nYou are at the {loc}\n")
         print(loc.description)
         if loc.enemy:
             player.combat_sequence(loc.enemy)
-        print("Exits:")
+        print("\nExits:")
         for direction, destination in loc.exits.items():
             print(f"{direction} → {destination.name}")  # destination is also a Location
     

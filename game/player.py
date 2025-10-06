@@ -1,6 +1,7 @@
 from game.world import *
 from game.enemies import *
 import random
+import sys
 
 class Player:
     def __init__(self, name, starting_location, health=20, attack =15):
@@ -12,6 +13,25 @@ class Player:
         self.attack = attack
         self.combat = False
         self.previous_location = starting_location
+
+    def look(self):
+        if self.location.items:
+            item = self.location.items[0]
+            print(f"\nYou look around for anything usable and you find a {item.name}\n")
+        else:
+            print(f"\nYou find nothing...\n")
+
+    def pick_up_weapon(self, weapon):
+        self.weapon = weapon
+
+    def pick_up_food(self, food):
+        self.inventory.append(food)
+
+    def pick_up_item(self, item):
+        if isinstance(item, Food):
+            self.pick_up_food(item)
+        elif isinstance(item, Weapon):
+            self.pick_up_weapon(item)         
 
     def move(self, direction):
         if direction in self.location.exits:
@@ -41,6 +61,8 @@ class Player:
             command = input("> ").strip().lower()
             if command == 'attack':
                 player_attack = self.attack
+                if self.weapon:
+                    player_attack += self.weapon.attack
                 enemy.health -= player_attack
                 print(f"\nYou attack the {enemy.name} for {player_attack} damage")
                 self.health = max(self.health, 0)
@@ -64,6 +86,12 @@ class Player:
                 else:
                     self.health -= 5
                     print(f"\nYou tripped and failed to flee")
+            elif command == 'quit':
+                print("You run back to safety. Game over!")
+                sys.exit()
+                break
+            else:
+                print("Unknown command.")
             round_number += 1
 
 

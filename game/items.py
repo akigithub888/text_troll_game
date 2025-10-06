@@ -21,4 +21,4 @@ class Food(Item):
 
 
 spear = Weapon("spear", attack=3)
-questionable_meat = Food("questionable meat", heal_amount=10)
+questionable_steak = Food("questionable steak", heal_amount=10)

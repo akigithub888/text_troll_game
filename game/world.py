@@ -31,5 +31,5 @@ clearing.add_exit("east", cannibal_camp)
 riverbank.add_exit("south", clearing)
 riverbank.add_items(spear)
 cannibal_camp.add_exit("west", clearing)
-cannibal_camp.add_items(questionable_meat)
+cannibal_camp.add_items(questionable_steak)
 

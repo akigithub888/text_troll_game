@@ -23,6 +23,8 @@ class Player:
 
     def pick_up_weapon(self, weapon):
         self.weapon = weapon
+        current_attack = self.attack + weapon.attack
+        print(f"You picked up the {weapon.name} and equipped it. Your attack is now {current_attack }")
 
     def pick_up_food(self, food):
         self.inventory.append(food)
@@ -31,13 +33,18 @@ class Player:
         if isinstance(item, Food):
             self.pick_up_food(item)
         elif isinstance(item, Weapon):
-            self.pick_up_weapon(item)         
+            self.pick_up_weapon(item)
+
+    def use_item(self, item):
+        if isinstance(item, Food):
+            self.health += item.heal_amount
+        #add options if you add non food items       
 
     def move(self, direction):
         if direction in self.location.exits:
             self.previous_location = self.location
             self.location = self.location.exits[direction]
-            print(f"\nYou move {direction} to {self.location.name}.")
+            print(f"\nYou move {direction} to the {self.location.name}.")
         else:
             print("You can't go that way!")
     
@@ -67,7 +74,7 @@ class Player:
                 print(f"\nYou attack the {enemy.name} for {player_attack} damage")
                 self.health = max(self.health, 0)
                 if enemy.health <= 0:
-                    print(f"\nYou have defeated {enemy.name}.\n")
+                    print(f"\nYou have defeated the {enemy.name}.\n")
                     break
         
                 enemy_attack = enemy.attack
@@ -86,6 +93,14 @@ class Player:
                 else:
                     self.health -= 5
                     print(f"\nYou tripped and failed to flee")
+
+            elif command.startswith("use "):
+                item = command.split()[1]
+                if isinstance(item, Item):
+                    self.use_item(item)
+                else:
+                    print(f"{item} not in available")
+
             elif command == 'quit':
                 print("You run back to safety. Game over!")
                 sys.exit()

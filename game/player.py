@@ -3,6 +3,7 @@ from game.enemies import *
 import random
 import sys
 
+
 class Player:
     def __init__(self, name, starting_location, health=20, attack =15):
         self.name = name

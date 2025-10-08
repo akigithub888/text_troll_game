@@ -1,21 +1,33 @@
 from game.player import *
 from game.world import *
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.progress import Progress
+from rich.text import Text
+from game.ui import show_location, show_items, enemy_info, show_intro
+
+
 
 def main():
-    print("\n______________________\n\n🌴 Welcome to Stranglethorn Vale! 🌴\n______________________\n\n")
-    print("You are a lost troll, deep in the jungle...\n")
+    #print("\n______________________\n\n🌴 Welcome to Stranglethorn Vale! 🌴\n______________________\n\n")
+    show_intro()
+    #print("You are a lost troll, deep in the jungle...\n")
     #print("Type 'quit' to quit the game.\n")
 
     player = Player("Troll", clearing)
-    print(player.location.description)
+    #print(player.location.description)
 
     while True:
         loc = player.location
         if loc.enemy and loc.enemy.health > 0:
             player.combat_sequence(loc.enemy)
-        print("\nExits:")
-        for direction, destination in loc.exits.items():
-            print(f"{direction} → {destination.name}")  # destination is also a Location
+        #print("\nExits:")
+        show_location(loc)
+
+
+        #for direction, destination in loc.exits.items():
+            #print(f"{direction} → {destination.name}")  # destination is also a Location
     
         command = input("> ").strip().lower()
 

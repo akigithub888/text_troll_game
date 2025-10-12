@@ -5,6 +5,7 @@ from rich.text import Text
 from rich.console import Group
 from rich import box
 from rich.box import Box   
+from rich.progress import Progress, BarColumn, TextColumn
 
 
 console = Console()
@@ -79,4 +80,23 @@ def enemy_info(location):
             padding=(0, 2)
         )
         console.print(enemy_panel)
+
+
+def show_movement(direction, location_name):
+    text = Text(f"\nYou move {direction} to the {location_name}.", style="green italic")    
+    panel = Panel.fit(
+        text,
+        border_style="green",
+    )
+    console.print(panel)
+
+def show_combat_intro(enemy):
+    header = Text("⚔️   COMBAT  ⚔️", style = "bright_red")
+    body = f"A wild {enemy.name} attacks you"
+    panel = Panel.fit(
+        body,
+        title=header,
+        border_style="bright_red"
+    )
+    console.print(panel)
 

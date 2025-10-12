@@ -1,5 +1,6 @@
 from game.world import *
 from game.enemies import *
+from game.ui import *
 import random
 import sys
 
@@ -45,7 +46,8 @@ class Player:
         if direction in self.location.exits:
             self.previous_location = self.location
             self.location = self.location.exits[direction]
-            print(f"\nYou move {direction} to the {self.location.name}.")
+            #print(f"\nYou move {direction} to the {self.location.name}.")
+            show_movement(direction, self.location.name)
         else:
             print("You can't go that way!")
     
@@ -59,7 +61,8 @@ class Player:
         return f"{self.name} — HP: {self.health}"
     
     def combat_sequence(self, enemy):
-        print(f"\nA wild {enemy.name} attacks you\n")
+        #print(f"\nA wild {enemy.name} attacks you\n")
+        show_combat_intro(enemy)
         round_number = 1
         while self.health > 0 and enemy.health > 0:
             print("-------------------------")
